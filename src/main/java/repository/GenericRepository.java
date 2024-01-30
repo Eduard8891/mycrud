@@ -9,7 +9,7 @@ public interface GenericRepository<T, ID> {
 
     List<T> getAll();
 
-    void update(T t);
+    T update(T t);
 
-    void create(T t);
+    T create(T t);
 }

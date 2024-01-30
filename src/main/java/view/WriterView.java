@@ -7,10 +7,13 @@ public class WriterView {
     private final PrintStream printStream;
     private final Scanner scanner;
 
+    public WriterView() {
+        this.printStream = System.out;
+        this.scanner = new Scanner(System.in);
+    }
 
-    public WriterView(Scanner scanner, PrintStream printStream) {
-        this.printStream = printStream;
-        this.scanner = scanner;
+    public void selectCommand() {
+
     }
 
     public String readLine() {

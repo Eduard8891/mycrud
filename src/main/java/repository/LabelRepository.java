@@ -1,22 +1,9 @@
 package repository;
 
-import model.Writer;
 
-import java.util.List;
+import model.Label;
 
-public interface LabelRepository extends GenericRepository<Writer, Integer>{
-    @Override
-    Writer get(Integer id);
 
-    @Override
-    void delete(Integer id);
+public interface LabelRepository extends GenericRepository<Label, Integer>{
 
-    @Override
-    List<Writer> getAll();
-
-    @Override
-    void update(Writer writer);
-
-    @Override
-    void create(Writer writer);
 }

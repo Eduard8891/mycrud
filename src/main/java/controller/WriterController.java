@@ -1,31 +1,16 @@
 package controller;
 
 import model.Writer;
-import view.WriterView;
+import repository.GsonWriterRepositoryImpl;
+import repository.WriterRepository;
 
 import java.util.List;
 
 public class WriterController {
-    private final WriterView view;
+    private final WriterRepository writerRepository;
 
-    public WriterController(WriterView view) {
-        this.view = view;
-    }
-
-    public void selectCommand(String line) {
-        String command = line.split(" ")[0];
-        switch (command) {
-            case "Создать":
-                createWriter(line);
-            case "Удалить":
-                deleteWriter(line);
-            case "Обновить":
-                updateWriter(line);
-            case "Показать":
-                showWriter(line);
-            default:
-                view.errorText(line);
-        }
+    public WriterController() {
+        this.writerRepository = new GsonWriterRepositoryImpl();
     }
 
     public List<Writer> getAll(String line) {

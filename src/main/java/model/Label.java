@@ -1,16 +1,24 @@
 package model;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class Label {
     private Integer id;
     private String name;
     private PostStatus status;
 
-    public Label() {
+    public Label(String name, Integer id) {
+        this.name = name;
+        this.id = id;
+        status = PostStatus.ACTIVE;
     }
 
-    public Label(Integer id, String name) {
-        this.id = id;
-        this.name = name;
+    @Override
+    public String toString() {
+        return name;
     }
 }
 

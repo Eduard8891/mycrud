@@ -1,10 +1,18 @@
 package repository;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import model.Writer;
 
 import java.util.List;
 
 public class GsonWriterRepositoryImpl implements WriterRepository {
+
+    private final Gson gson = new Gson();
+
+    public GsonWriterRepositoryImpl() {
+    }
+
     @Override
     public Writer get(Integer id) {
         return null;
@@ -21,12 +29,12 @@ public class GsonWriterRepositoryImpl implements WriterRepository {
     }
 
     @Override
-    public void update(Writer writer) {
-
+    public Writer update(Writer writer) {
+        return null;
     }
 
     @Override
-    public void create(Writer writer) {
-
+    public Writer create(Writer writer) {
+        return null;
     }
 }

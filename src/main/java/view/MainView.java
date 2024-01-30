@@ -6,11 +6,39 @@ import java.util.Scanner;
 public class MainView {
     private final PrintStream printStream;
     private final Scanner scanner;
+    private final LabelView labelView;
+    private final PostView postView;
+    private final WriterView writerView;
 
+    public MainView() {
+        this.printStream = System.out;
+        this.scanner = new Scanner(System.in);
+        this.labelView = new LabelView();
+        this.postView = new PostView();
+        this.writerView = new WriterView();
 
-    public MainView(Scanner scanner, PrintStream printStream) {
-        this.printStream = printStream;
-        this.scanner = scanner;
+    }
+
+    public void start() {
+        while (true) {
+            defaultText();
+            String line = readLine();
+            if (line.equals("!Стоп")) {
+                return;
+            }
+            if (!line.isEmpty()) {
+                switch (line) {
+                    case "Пост":
+                        postView.selectCommand();
+                    case "Метка":
+                        labelView.selectCommand();
+                    case "Автор":
+                        writerView.selectCommand();
+                    default:
+                        errorText(line);
+                }
+            }
+        }
     }
 
     public String readLine() {

@@ -1,8 +1,8 @@
-import controller.MainController;
+import view.MainView;
 
 public class Runner {
     public static void main(String[] args) {
-        MainController mainController = new MainController();
-        mainController.start();
+        MainView mainView = new MainView();
+        mainView.start();
     }
 }

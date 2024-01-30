@@ -7,10 +7,13 @@ public class PostView {
     private final PrintStream printStream;
     private final Scanner scanner;
 
+    public PostView() {
+        this.printStream = System.out;
+        this.scanner = new Scanner(System.in);
+    }
 
-    public PostView(Scanner scanner, PrintStream printStream) {
-        this.printStream = printStream;
-        this.scanner = scanner;
+    public void selectCommand() {
+
     }
 
     public String readLine() {

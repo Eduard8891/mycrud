@@ -1,33 +1,38 @@
 package repository;
 
-import model.Writer;
+import com.google.gson.Gson;
+import model.Post;
 
 import java.util.List;
 
 public class GsonPostRepositoryImpl implements PostRepository {
 
+    private final Gson gson = new Gson();
+
+    public GsonPostRepositoryImpl() {
+    }
+
     @Override
-    public Writer get(Integer id) {
+    public Post get(Integer id) {
         return null;
     }
 
     @Override
     public void delete(Integer id) {
-
     }
 
     @Override
-    public List<Writer> getAll() {
+    public List<Post> getAll() {
         return null;
     }
 
     @Override
-    public void update(Writer writer) {
-
+    public Post update(Post post) {
+        return null;
     }
 
     @Override
-    public void create(Writer writer) {
-
+    public Post create(Post post) {
+        return null;
     }
 }
