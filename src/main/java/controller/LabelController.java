@@ -30,13 +30,8 @@ public class LabelController {
         return false;
     }
 
-    public boolean deleteLabel(String name) {
-        Label current = getAll().stream().filter(it -> it.getName().equals(name)).findFirst().orElse(null);
-        if (current != null) {
-            labelRepository.delete(current.getId());
-            return true;
-        } else {
-            return false;
-        }
+    public boolean deleteLabel(Integer id) {
+        labelRepository.delete(id);
+        return true;
     }
 }

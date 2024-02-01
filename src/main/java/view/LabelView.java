@@ -18,23 +18,26 @@ public class LabelView {
     }
 
     public void selectCommand() {
+        defaultText();
         while (true) {
-            defaultText();
             String line = readLine();
-            if (!line.isEmpty()) {
-                switch (line) {
+            if (!line.isEmpty() && line.split(" ").length == 2) {
+                String command = line.split(" ")[0];
+                String body = line.split(" ")[1];
+                switch (command) {
                     case "Создать": {
-                        boolean success = labelController.createLabel(line);
+                        boolean success = labelController.createLabel(body);
                         if (success) success();
                         return;
                     }
                     case "Удалить": {
-                        boolean success = labelController.deleteLabel(line);
+                        boolean success = labelController.deleteLabel(Integer.valueOf(body));
                         if (success) success();
                         return;
                     }
                     case "Показать все":
                         labelController.getAll().forEach(printStream::println);
+                        return;
                     default:
                         errorText(line);
                 }
@@ -47,7 +50,7 @@ public class LabelView {
     }
 
     public void defaultText() {
-        printStream.println("Вы выбрали 'Метка'! \nТеперь укажите команду: \nСоздать\nУдалить\nПоказать все");
+        printStream.println("Вы выбрали 'Метка'! \nТеперь укажите команду: \nСоздать 'имя_тега'\nУдалить 'ИД_тега'\nПоказать все");
     }
 
     public void success() {

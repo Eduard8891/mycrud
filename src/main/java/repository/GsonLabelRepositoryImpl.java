@@ -5,16 +5,16 @@ import com.google.gson.reflect.TypeToken;
 import model.Label;
 import model.PostStatus;
 
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.Reader;
 import java.io.Writer;
 import java.lang.reflect.Type;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
 public class GsonLabelRepositoryImpl implements LabelRepository {
+    private final String PATH = Paths.get("labels.json").toAbsolutePath().toString();
 
     private final Gson gson = new Gson();
 
@@ -25,21 +25,17 @@ public class GsonLabelRepositoryImpl implements LabelRepository {
 
     @Override
     public void delete(Integer id) {
-        List<Label> labels = new ArrayList<>();
-        Type type = new TypeToken<List<Label>>() {
-        }.getType();
-        try (Reader reader = new FileReader("resources/labels.json")) {
-            labels = gson.fromJson(reader, type);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-        labels.stream().filter(it -> it.getId().equals(id)).findFirst().ifPresent(label -> label.setStatus(PostStatus.DELETED));
-
+        List<Label> labels = getAll();
+        labels.stream()
+                .filter(it -> it.getId().equals(id))
+                .findFirst().ifPresent(label -> label.setStatus(PostStatus.DELETED));
     }
 
     @Override
     public List<Label> getAll() {
-        return null;
+        Type listOfMyClassObject = new TypeToken<ArrayList<Label>>() {
+        }.getType();
+        return gson.fromJson(PATH, listOfMyClassObject);
     }
 
     @Override
@@ -49,11 +45,17 @@ public class GsonLabelRepositoryImpl implements LabelRepository {
 
     @Override
     public Label create(Label label) {
-        try (Writer writer = new FileWriter("resources/labels.json")) {
-            gson.toJson(label, writer);
+        List<Label> labels = getAll();
+        labels.add(label);
+        saveLabels(labels);
+        return label;
+    }
+
+    private void saveLabels(List<Label> labels) {
+        try (Writer writer = new FileWriter(PATH)) {
+            gson.toJson(labels, writer);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-        return label;
     }
 }
