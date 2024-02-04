@@ -30,10 +30,13 @@ public class MainView {
                 switch (line) {
                     case "Пост":
                         postView.selectCommand();
+                        continue;
                     case "Метка":
                         labelView.selectCommand();
+                        continue;
                     case "Автор":
                         writerView.selectCommand();
+                        continue;
                     default:
                         errorText(line);
                 }
@@ -46,7 +49,7 @@ public class MainView {
     }
 
     public void defaultText() {
-        printStream.println("Выберите сущность:\nПост\nМетка\nАвтор");
+        printStream.println("Вы в главном меню.Выберите сущность:\nПост\nМетка\nАвтор");
     }
 
     public void errorText(String line) {

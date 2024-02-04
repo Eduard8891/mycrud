@@ -21,23 +21,26 @@ public class LabelView {
         defaultText();
         while (true) {
             String line = readLine();
+            if (line.equalsIgnoreCase("Обратно")) {
+                return;
+            } else if (line.equalsIgnoreCase("Показать все")) {
+                labelController.getAll().forEach(printStream::println);
+                continue;
+            }
             if (!line.isEmpty() && line.split(" ").length == 2) {
                 String command = line.split(" ")[0];
                 String body = line.split(" ")[1];
-                switch (command) {
-                    case "Создать": {
+                switch (command.toLowerCase()) {
+                    case "создать": {
                         boolean success = labelController.createLabel(body);
                         if (success) success();
-                        return;
+                        continue;
                     }
-                    case "Удалить": {
+                    case "удалить": {
                         boolean success = labelController.deleteLabel(Integer.valueOf(body));
                         if (success) success();
-                        return;
+                        continue;
                     }
-                    case "Показать все":
-                        labelController.getAll().forEach(printStream::println);
-                        return;
                     default:
                         errorText(line);
                 }

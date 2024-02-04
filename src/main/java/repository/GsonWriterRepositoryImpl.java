@@ -4,9 +4,11 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import model.Writer;
 
+import java.nio.file.Paths;
 import java.util.List;
 
 public class GsonWriterRepositoryImpl implements WriterRepository {
+    private final String PATH = Paths.get("src/main/resources/writers.json").toAbsolutePath().toString();
 
     private final Gson gson = new Gson();
 

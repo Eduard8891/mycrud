@@ -22,8 +22,9 @@ public class LabelController {
             List<Label> labels = getAll();
             Label current = labels.stream().filter(it -> it.getName().equals(name)).findFirst().orElse(null);
             if (current == null) {
-                Integer id = labels.stream().map(Label::getId).max(Integer::compareTo).orElse(0);
-                labelRepository.create(new Label(name, id + 1));
+                Label label = new Label();
+                label.setName(name);
+                labelRepository.create(label);
                 return true;
             }
         }

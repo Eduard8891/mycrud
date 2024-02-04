@@ -1,21 +1,20 @@
 package model;
 
+import com.google.gson.annotations.SerializedName;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.util.List;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Writer {
     private Integer id;
     private String firstName;
     private String lastName;
     private List<Post> posts;
+    @SerializedName("status")
     private PostStatus status;
-
-    public Writer() {
-    }
-
-    public Writer(Integer id, String firstName, String lastName, List<Post> posts) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.posts = posts;
-    }
 }
