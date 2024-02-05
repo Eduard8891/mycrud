@@ -17,13 +17,13 @@ public class LabelController {
         return labelRepository.getAll();
     }
 
-    public boolean createLabel(String name) {
-        if (name.split(" ").length == 1) {
+    public boolean createLabel(String body) {
+        if (body.split(" ").length == 1) {
             List<Label> labels = getAll();
-            Label current = labels.stream().filter(it -> it.getName().equals(name)).findFirst().orElse(null);
+            Label current = labels.stream().filter(it -> it.getName().equals(body)).findFirst().orElse(null);
             if (current == null) {
                 Label label = new Label();
-                label.setName(name);
+                label.setName(body);
                 labelRepository.create(label);
                 return true;
             }
@@ -31,8 +31,7 @@ public class LabelController {
         return false;
     }
 
-    public boolean deleteLabel(Integer id) {
+    public void deleteLabel(Integer id) {
         labelRepository.delete(id);
-        return true;
     }
 }

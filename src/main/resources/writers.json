@@ -1,0 +1,1 @@
+[{"id":1,"firstName":"Шарипов","lastName":"Эдуард","status":"DELETED"},{"id":2,"firstName":"Лев","lastName":"Толстой","posts":[{"id":1,"content":"Новый пост","created":"Feb 5, 2024, 8:12:50 PM","updated":"Feb 5, 2024, 8:15:51 PM","labels":[{"id":1,"name":"прпр","status":"ACTIVE"},{"id":3,"name":"Успех","status":"DELETED"}],"status":"DELETED"}],"status":"ACTIVE"}]

@@ -37,8 +37,7 @@ public class LabelView {
                         continue;
                     }
                     case "удалить": {
-                        boolean success = labelController.deleteLabel(Integer.valueOf(body));
-                        if (success) success();
+                        labelController.deleteLabel(Integer.valueOf(body));
                         continue;
                     }
                     default:
@@ -53,15 +52,15 @@ public class LabelView {
     }
 
     public void defaultText() {
-        printStream.println("Вы выбрали 'Метка'! \nТеперь укажите команду: \nСоздать 'имя_тега'\nУдалить 'ИД_тега'\nПоказать все");
+        printStream.println("Вы выбрали 'Метка'! \nТеперь укажите команду: \nСоздать 'имя_тега'\nУдалить 'ИД_тега'\nПоказать все\nОбратно");
     }
 
     public void success() {
-        printStream.println("Успех!");
+        printStream.println("Команда выполнена успешно!");
     }
 
     public void errorText(String line) {
-        printStream.printf("Вы допустили ошибку в команде для 'метка': \n%s\n", line);
+        printStream.printf("Вы допустили ошибку в команде для 'метка': %s\n", line);
     }
 
 }

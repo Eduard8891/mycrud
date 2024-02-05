@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
-import javax.xml.crypto.Data;
+import java.util.Date;
 import java.util.List;
 
 @lombok.Data
@@ -13,8 +13,8 @@ import java.util.List;
 public class Post {
     private Integer id;
     private String content;
-    private Data created;
-    private Data updated;
+    private Date created;
+    private Date updated;
     private List<Label> labels;
     @SerializedName("status")
     private PostStatus status;

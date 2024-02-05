@@ -1,11 +1,8 @@
 package repository;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
+import lombok.NoArgsConstructor;
 import model.Label;
 import model.PostStatus;
 
@@ -17,11 +14,9 @@ import java.io.Writer;
 import java.lang.reflect.Type;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
+@NoArgsConstructor
 public class GsonLabelRepositoryImpl implements LabelRepository {
     private final String PATH = Paths.get("src/main/resources/labels.json").toAbsolutePath().toString();
 
