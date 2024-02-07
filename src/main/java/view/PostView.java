@@ -3,7 +3,9 @@ package view;
 import controller.PostController;
 
 import java.io.PrintStream;
+import java.util.Arrays;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class PostView {
     private final PrintStream printStream;
@@ -31,8 +33,13 @@ public class PostView {
                 String body = line.split(" ", 2)[1];
                 switch (command.toLowerCase()) {
                     case "создать": {
-                        boolean success = postController.createPost(body);
-                        if (success) success();
+                        String tags = body.replaceAll(" ", "").split("___")[1].replaceAll(",", "");
+                        if (tags.matches("\\d+")) {
+                            boolean success = postController.createPost(body);
+                            if (success) success();
+                        } else {
+                            errorText(line);
+                        }
                         continue;
                     }
                     case "редактировать": {

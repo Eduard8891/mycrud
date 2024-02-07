@@ -4,11 +4,10 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import lombok.NoArgsConstructor;
-import model.Label;
+
 import model.Post;
 import model.PostStatus;
 
-import javax.xml.crypto.Data;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -67,6 +66,7 @@ public class GsonPostRepositoryImpl implements PostRepository {
                 it.setContent(post.getContent());
             }
         });
+        savePosts(allPosts);
         return post;
     }
 

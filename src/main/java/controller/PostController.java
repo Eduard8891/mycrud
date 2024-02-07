@@ -55,7 +55,7 @@ public class PostController {
             if (allLabels.stream().map(Label::getId).collect(Collectors.toList()).containsAll(idsLabels)) {
                 List <Label> currentLabels = allLabels.stream().filter(it -> idsLabels.contains(it.getId())).collect(Collectors.toList());
                 String content = body.split("___")[1].trim();
-                Post post = allPosts.get(id);
+                Post post = allPosts.stream().filter(it -> it.getId().equals(id)).findFirst().orElse(null);
                 post.setContent(content);
                 post.setLabels(currentLabels);
                 postRepository.update(post);
