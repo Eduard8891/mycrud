@@ -1,7 +1,7 @@
 package controller;
 
 import model.Label;
-import repository.GsonLabelRepositoryImpl;
+import repository.gson.GsonLabelRepositoryImpl;
 import repository.LabelRepository;
 
 import java.util.List;

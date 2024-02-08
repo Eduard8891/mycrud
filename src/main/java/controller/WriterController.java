@@ -2,8 +2,8 @@ package controller;
 
 import model.Post;
 import model.Writer;
-import repository.GsonPostRepositoryImpl;
-import repository.GsonWriterRepositoryImpl;
+import repository.gson.GsonPostRepositoryImpl;
+import repository.gson.GsonWriterRepositoryImpl;
 import repository.PostRepository;
 import repository.WriterRepository;
 

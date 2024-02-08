@@ -2,8 +2,8 @@ package controller;
 
 import model.Label;
 import model.Post;
-import repository.GsonLabelRepositoryImpl;
-import repository.GsonPostRepositoryImpl;
+import repository.gson.GsonLabelRepositoryImpl;
+import repository.gson.GsonPostRepositoryImpl;
 import repository.LabelRepository;
 import repository.PostRepository;
 

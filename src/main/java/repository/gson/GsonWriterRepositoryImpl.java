@@ -1,4 +1,4 @@
-package repository;
+package repository.gson;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -25,7 +25,7 @@ public class GsonWriterRepositoryImpl implements WriterRepository {
 
     @Override
     public Writer get(Integer id) {
-        return null;
+        return getAllInternal().stream().filter(it -> it.getId().equals(id)).findFirst().get();
     }
 
     @Override
@@ -41,7 +41,12 @@ public class GsonWriterRepositoryImpl implements WriterRepository {
 
     @Override
     public List<Writer> getAll() {
-        List <Writer> writers = null;
+        return getAllInternal();
+    }
+
+
+    private List<Writer> getAllInternal() {
+        List<Writer> writers = null;
         Type listOfMyClassObject = new TypeToken<ArrayList<Writer>>() {
         }.getType();
         try (Reader reader = new FileReader(PATH)) {
@@ -54,7 +59,17 @@ public class GsonWriterRepositoryImpl implements WriterRepository {
 
     @Override
     public Writer update(Writer writer) {
-        return null;
+        List<Writer> writers = getAllInternal();
+        writers.forEach(it -> {
+            if (writer.getId().equals(it.getId())) {
+                it.setPosts(writer.getPosts());
+                it.setLastName(writer.getLastName());
+                it.setFirstName(writer.getFirstName());
+                it.setStatus(PostStatus.UNDER_REVIEW);
+            }
+        });
+        saveWriters(writers);
+        return writer;
     }
 
     @Override

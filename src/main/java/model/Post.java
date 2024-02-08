@@ -1,6 +1,5 @@
 package model;
 
-import com.google.gson.annotations.SerializedName;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
@@ -16,6 +15,5 @@ public class Post {
     private Date created;
     private Date updated;
     private List<Label> labels;
-    @SerializedName("status")
     private PostStatus status;
 }

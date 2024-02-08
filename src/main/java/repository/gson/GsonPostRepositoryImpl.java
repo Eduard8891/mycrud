@@ -1,4 +1,4 @@
-package repository;
+package repository.gson;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -19,6 +19,7 @@ import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @NoArgsConstructor
 public class GsonPostRepositoryImpl implements PostRepository {
@@ -27,12 +28,12 @@ public class GsonPostRepositoryImpl implements PostRepository {
 
     @Override
     public Post get(Integer id) {
-        return null;
+        return getAllInternal().stream().filter(it -> it.getId().equals(id)).findFirst().get();
     }
 
     @Override
     public void delete(Integer id) {
-        List<Post> allPosts = getAll();
+        List<Post> allPosts = getAllInternal();
         allPosts.forEach(it -> {
             if (it.getId().equals(id)) {
                 it.setStatus(PostStatus.DELETED);
@@ -44,6 +45,11 @@ public class GsonPostRepositoryImpl implements PostRepository {
 
     @Override
     public List<Post> getAll() {
+        return getAllInternal().stream().filter(it -> it.getStatus().equals(PostStatus.ACTIVE)).collect(Collectors.toList());
+    }
+
+
+    private List<Post> getAllInternal() {
         List<Post> posts = null;
         Type listOfMyClassObject = new TypeToken<ArrayList<Post>>() {
         }.getType();
@@ -54,6 +60,8 @@ public class GsonPostRepositoryImpl implements PostRepository {
         }
         return posts;
     }
+
+
 
     @Override
     public Post update(Post post) {
@@ -72,7 +80,7 @@ public class GsonPostRepositoryImpl implements PostRepository {
 
     @Override
     public Post create(Post post) {
-        List<Post> allPosts = getAll();
+        List<Post> allPosts = getAllInternal();
         Date date = new Date();
         post.setCreated(date);
         post.setUpdated(date);

@@ -1,4 +1,4 @@
-package repository;
+package repository.gson;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -15,6 +15,7 @@ import java.lang.reflect.Type;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @NoArgsConstructor
 public class GsonLabelRepositoryImpl implements LabelRepository {
@@ -24,7 +25,7 @@ public class GsonLabelRepositoryImpl implements LabelRepository {
 
     @Override
     public Label get(Integer id) {
-        return null;
+       return getAllInternal().stream().filter(it -> it.getId().equals(id)).findFirst().get();
     }
 
     @Override
@@ -40,19 +41,33 @@ public class GsonLabelRepositoryImpl implements LabelRepository {
 
     @Override
     public List<Label> getAll() {
+        return getAllInternal().stream().filter(it -> it.getStatus().equals(PostStatus.ACTIVE)).collect(Collectors.toList());
+    }
+
+
+    private List<Label> getAllInternal() {
+        List <Label> labels = new ArrayList<>();
         Type listOfMyClassObject = new TypeToken<ArrayList<Label>>() {
         }.getType();
         try (Reader reader = new FileReader(PATH)) {
-            return gson.fromJson(reader, listOfMyClassObject);
+            labels = gson.fromJson(reader, listOfMyClassObject);
         } catch (IOException ex) {
-            ex.printStackTrace();
+            System.out.println(ex.getMessage());
         }
-        return null;
+        return labels;
     }
 
     @Override
     public Label update(Label label) {
-        return null;
+        List <Label> labels = getAllInternal();
+        labels.forEach(it -> {
+            if (it.getId().equals(label.getId())) {
+                it.setStatus(PostStatus.UNDER_REVIEW);
+                it.setName(label.getName());
+            }
+        });
+        saveLabels(labels);
+        return label;
     }
 
     @Override
