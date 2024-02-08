@@ -23,18 +23,18 @@ public class MainView {
         while (true) {
             defaultText();
             String line = readLine();
-            if (line.equals("!Стоп")) {
+            if (line.equalsIgnoreCase("!Стоп")) {
                 return;
             }
             if (!line.isEmpty()) {
-                switch (line) {
-                    case "Пост":
+                switch (line.toLowerCase()) {
+                    case "пост":
                         postView.selectCommand();
                         continue;
-                    case "Метка":
+                    case "метка":
                         labelView.selectCommand();
                         continue;
-                    case "Автор":
+                    case "автор":
                         writerView.selectCommand();
                         continue;
                     default:
